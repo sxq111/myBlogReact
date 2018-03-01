@@ -239,15 +239,18 @@ module.exports = {
 						// it's runtime that would otherwise processed through "file" loader.
 						// Also exclude `html` and `json` extensions so they get processed
 						// by webpacks internal loaders.
-						exclude: [/\.js$/, /\.html$/, /\.json$/],
+						exclude: [/\.js$/, /\.html$/, /\.json$/, /\.md$/],//这里把 raw loader给屏蔽了，所以才不起作用
 						loader: require.resolve('file-loader'),
 						options: {
 							name: 'static/media/[name].[hash:8].[ext]',
 						},
 					},
 					{
-						test: /\.txt$/,
-						use: 'raw-loader'
+						exclude:paths.appNodeModules,
+						test: /\.md$/,
+						use: [
+							'raw-loader'
+						],
 					}
 				],
 			},
@@ -288,7 +291,7 @@ module.exports = {
 		// https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
 		// You can remove this if you don't use Moment.js:
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-		new ExtractTextPlugin("'css/[name].[contenthash].css")
+		new ExtractTextPlugin("css/[name].[contenthash].css")
 	],
 	// Some libraries import Node modules but don't use them in the browser.
 	// Tell Webpack to provide empty mocks for them so importing them works.

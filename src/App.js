@@ -8,26 +8,20 @@ import LoginContainer from './Containers/LoginContainer'
 import Auth from './Containers/Auth'
 import { BrowserRouter, Route, NavLink, Switch, Redirect, Link } from 'react-router-dom';
 import { Button, Input ,Card} from 'antd';
-import DrawBoard from './Containers/DrawBoard'
-import Nav from './Components/Nav'
-import testmd from './test.txt';
+import DrawBoard from './Containers/DrawBoard';
+import Nav from './Components/Nav';
+import RMD from 'react-markdown';
+// import md from './test.md';
+
 class App extends Component {
 	constructor(props) {
 		super(props);
-
+		this.state = {}
 	}
 	async  componentDidMount() {
-		console.log(testmd);
-		// let arr = [1,2,5];//学习下reduce
-		// arr.reduce((p,c)=>{
-		// 	console.log(p,c)
-		// 	return p+c;
-		// },7);
 		Object.keys(reducers).forEach(name => {
 			updateReducer(name, reducers[name]);
 		});
-		// console.log('app',this);
-		// console.log(this.hasOwnProperty('setState'));
 	}
 	render() {
 		return (
@@ -35,27 +29,9 @@ class App extends Component {
 				<BrowserRouter>
 
 					<div className = { stylesLess.testC} style={{ width: '100%', background: '#345' }}>
-						<Nav />
-						{/* {
-							Usual.test2()
-						}
-						<Usual /> */}
-						{/* <Usual2/> */}
-						<Switch>
-							<Route path='/home' render={() => {
-								return (<h1>HOME</h1>);
-							}} />
-							<Route path='/page2' component={DrawBoard} />
-							<Route path='/login' component={LoginContainer} />
-							<Route path='/page404' render={() => {
-								return (<h1>404 not found</h1>);
-							}} />
-							<Redirect from='/' to='/page404' />
-						</Switch>
-						{
-							//先禁用登陆验证
-							<Route path='/' component={Auth} />
-						}
+						<div style = {{width:800,height:800,background:'#888'}}>
+							{/* <RMD source = {} /> */}
+						</div>
 					</div>
 				</BrowserRouter>
 			</Provider>

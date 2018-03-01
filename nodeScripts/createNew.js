@@ -53,7 +53,7 @@ inquirer
         let newPost = JSON_TEMPLATE;
         JSON_TEMPLATE.tags =[...(new Set(tags.split(',')))];
 
-        fs.writeFile('articles/'+post_name + '.json', JSON.stringify(JSON_TEMPLATE),{flag:'wx'}, function (err) {
+        fs.writeFile('src/articles/'+post_name + '.json', JSON.stringify(JSON_TEMPLATE),{flag:'wx'}, function (err) {
             if (err) {
                 return console.error(err);
             }
