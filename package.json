@@ -2,7 +2,7 @@
     "name": "sxqredux",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://sxq111.github.io/blogReact",
+    "homepage": "https://sxq111.github.io/myBlogReact",
     "dependencies": {
         "antd": "^2.13.7",
         "case-sensitive-paths-webpack-plugin": "2.1.1",
