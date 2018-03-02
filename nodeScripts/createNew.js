@@ -8,25 +8,18 @@ const questions = [
         message: '请输入您的文章名',
         validate: value => {
             if (/(\.|\*|\?|\\|\/)/gi.test(value)) {
-                return '文章别名不得包含特殊符号（.*?\\/），请重新输入↑↑';
+                return '不得包含特殊符号（.*?\\/），请重新输入↑↑';
             }
-
-            if (/(([A-z]+-)+)?[A-z]+/gi.test(value)) {
-                return true;
-            }
-
-            return '文章别名不合法，请重新输入↑↑';
+            return true;
         },
-        filter: value => value.replace(/\s+/gi, '-'),
     },
     {
         type: 'input',
         name: 'tags',
         message: '请输入您的文章标签',
         validate: value => {
-            if (/\//.test(value)) {
-                console.log('您输入的标签有误');
-                return false;
+            if (/(\.|\*|\?|\\|\/)/gi.test(value)) {
+                return '不得包含特殊符号（.*?\\/），请重新输入↑↑';
             }
             return true;
         }
