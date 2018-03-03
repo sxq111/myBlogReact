@@ -56,7 +56,21 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: {
+    app: [require.resolve('./polyfills'), paths.appIndexJs],
+    vendors: [
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'react-router-redux',
+      'redux',
+      'redux-actions',
+      'redux-thunk',
+      'antd'
+    ],
+    blogs:[]
+  },
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -289,7 +303,7 @@ module.exports = {
     // It is absolutely essential that NODE_ENV was set to production here.
     // Otherwise React will be compiled in the very slow development mode.
     new webpack.DefinePlugin(env.stringified),
-    new UglifyJsPlugin({sourceMap: false}),
+    new UglifyJsPlugin({ sourceMap: false }),
     // Minify the code.
     // new webpack.optimize.UglifyJsPlugin({
     //   compress: {
