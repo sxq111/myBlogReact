@@ -3,10 +3,12 @@ import { Provider } from 'react-redux';
 import stylesLess from './App2.less';
 import store, { updateReducer } from './store'
 import reducers from './Action';
-import { BrowserRouter, Route, NavLink, Switch, Redirect, Link ,withRouter} from 'react-router-dom';
+import { BrowserRouter, Route, NavLink, Switch, Redirect, Link, withRouter } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import RMD from 'react-markdown';
 import FileMap from './articlesHelper/fileMap.json';
+import Nav from './Components/Nav';
+import ALink from './Components/ArticleLink';
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -16,11 +18,6 @@ class App extends Component {
 		this.state = {}
 	}
 	async  componentDidMount() {
-		//动态引入文章示例
-		// let test = import('./articles/javascript/closer').then(rst=>{
-		// 	console.log(rst.getArticle());
-		// })
-		// console.log(test);
 		Object.keys(reducers).forEach(name => {
 			updateReducer(name, reducers[name]);
 		});
@@ -30,30 +27,17 @@ class App extends Component {
 			<Provider store={store}>
 				<BrowserRouter>
 					<div className={stylesLess.body}>
-						{/* 导航区 */}
-						<Menu
-							theme="dark"
-							style={{ width: 120, height: '100%', float: 'left' }}
-							mode="inline">
-							{
-								Object.keys(FileMap).map(tag => {
-									return (
-										<Menu.Item key={tag}>
-											<div
-												onClick={() => {
-													this.setState({ currentTag: tag });
-												}}>
-												<span>{tag}</span>
-											</div>
-										</Menu.Item>)
-								})
-							}
-						</Menu>
+						<Nav fileMap={FileMap}
+							onChangeTag={
+								(tag) => {
+									this.setState({currentTag:tag});
+								}
+							} />
 						{/* 文章列表区 */}
-						<div style={{ height: '100%', width: 'auto', overflow: 'hidden', background: 'grey' }}>
+						<div style={{ height: '100%', width: 'auto', overflow: 'hidden', background: '#fff' }}>
 							<Switch>
-								<Route path='/blogReact/article/:tag/:name' render={(props) => {
-									let {match:{params}} = props;
+								<Route path='/:tag/:name' render={(props) => {
+									let { match: { params } } = props;
 									console.log(params)
 									let md = require(`./articles/${params.tag}/${params.name}`);
 									return (
@@ -61,12 +45,13 @@ class App extends Component {
 											{md.getArticle()}
 										</RMD>)
 								}} />
-								<Route path='/blogReact' render={(props) => {
+								<Route path='/' render={(props) => {
 									return this.state.currentTag && Object.keys(FileMap[this.state.currentTag]).map(name => {
 										return (
-											<div key={name}>
-												<Link to={`blogReact/article/${this.state.currentTag}/${name}`}>{name}</Link>
-											</div>)
+											<div style = {{margin:'5px'}}>
+												<ALink tag = {this.state.currentTag} name = {name}/>
+											</div>
+										)
 									}) || null
 								}} />
 							</Switch>
