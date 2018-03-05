@@ -71,6 +71,7 @@ inquirer
                     console.log('更新文件地图成功');
                 }));
                 copyExposerTemplate('src/articlesHelper/exposerTemplate.js', 'src/articles/' + tags + '/' + post_name + '/' + 'index.js');
+                copyExposerOverviewTemplate('src/articlesHelper/overviewTemplate.png', 'src/articles/' + tags + '/' + post_name + '/' + 'overview.png');
             });
         });
     })
@@ -80,7 +81,7 @@ inquirer
     });
 const copyExposerTemplate = (desPath, targetPath) => {
     var fs = require("fs");
-    var buf = new Buffer(2048);
+    var buf = new Buffer(1024);
     fs.open(desPath, 'r+', function (err, fd) {
         if (err) {
             return console.error(err);
@@ -94,4 +95,15 @@ const copyExposerTemplate = (desPath, targetPath) => {
             });
         });
     });
+}
+const copyExposerOverviewTemplate = (desPath, targetPath) => {
+    var fs = require("fs");
+    fs.readFile(desPath,function(err,originBuffer){            //读取图片位置（路径）
+        // console.log(Buffer.isBuffer(originBuffer));
+        fs.writeFile(targetPath,originBuffer,function(err){      //生成图片2(把buffer写入到图片文件)
+            if (err) {
+                console.log(err)
+            }
+        });
+    })
 }

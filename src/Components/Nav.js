@@ -6,7 +6,6 @@ export default class extends Component {
     render() {
         return (
             <Menu
-                theme="dark"
                 style={{ width: 120, height: '100%', float: 'left' }}
                 mode="inline">
                 {

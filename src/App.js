@@ -5,14 +5,14 @@ import store, { updateReducer } from './store'
 import reducers from './Action';
 import { BrowserRouter, Route, NavLink, Switch, Redirect, Link, withRouter } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
-import RMD from 'react-markdown';
-import FileMap from './articlesHelper/fileMap.json';
 import Nav from './Components/Nav';
 import ALink from './Components/ArticleLink';
-const Gitment = require('gitment');
-require('gitment/style/default.css');
+import Article from './Containers/Article';
+import FileMap from './articlesHelper/fileMap.json';
+// const Gitment = require('gitment');
+// require('gitment/style/default.css');
 const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -35,33 +35,10 @@ class App extends Component {
 								}
 							} />
 						{/* 文章列表区 */}
-						<div style={{ height: '100%', width: 'auto', overflow: 'hidden', background: '#fff' }}>
+						<div style={{ height: '100%', width: 'auto', overflow: 'scroll', background: '#fff' ,overflowX:'hidden'}}>
 							<Switch>
 								{/* 文章显示区 */}
-								<Route path='/:tag/:name' render={(props) => {
-									let { match: { params } } = props;
-									console.log(params)
-									let md = require(`./articles/${params.tag}/${params.name}`);
-									var gitment = new Gitment({
-										id: `articles-${params.tag}-${params.name}`, // 可选。默认为 location.href
-										owner: 'sxq222',
-										repo: 'sxq222.github.io',
-										oauth: {
-											client_id: 'c9f0c157b8f5ae0d2dfa',
-											client_secret: '6d66c15318a8ffafaf7cd6e9361dd1b8bfea511d',
-										},
-									})
-									setTimeout(()=>{
-										gitment.render('container');
-									},1000);
-									
-									return (
-										// <RMD>
-										// 	{md.getArticle()}
-										// </RMD>
-										<div id = 'container' ></div>
-										)
-								}} />
+								<Route path='/:tag/:name' component = {Article} />
 								<Route path='/' render={(props) => {
 									return this.state.currentTag && Object.keys(FileMap[this.state.currentTag]).map(name => {
 										return (
