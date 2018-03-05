@@ -36,6 +36,7 @@ class App extends Component {
 						{/* 文章列表区 */}
 						<div style={{ height: '100%', width: 'auto', overflow: 'hidden', background: '#fff' }}>
 							<Switch>
+								{/* 文章显示区 */}
 								<Route path='/:tag/:name' render={(props) => {
 									let { match: { params } } = props;
 									console.log(params)
