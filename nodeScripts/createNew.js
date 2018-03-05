@@ -69,7 +69,7 @@ inquirer
                     }
                     console.log('更新文件地图成功');
                 }));
-                copyExposerTemplate('src/articlesHelper/exposerTemplate.js','src/articles/' + tags + '/' + post_name + '/'+'index.js');
+                copyExposerTemplate('src/articlesHelper/exposerTemplate.js', 'src/articles/' + tags + '/' + post_name + '/' + 'index.js');
             });
         });
     })
@@ -77,7 +77,6 @@ inquirer
         /* 异常处理 */
         console.log('eee1', err);
     });
-
 const generateFileMap = (base, maxDepth = 2) => {
     return (function getMap(depth, path) {
         if (depth > maxDepth) {
@@ -92,7 +91,7 @@ const generateFileMap = (base, maxDepth = 2) => {
     })(1, base);
 }
 
-const copyExposerTemplate = (desPath,targetPath) => {
+const copyExposerTemplate = (desPath, targetPath) => {
     var fs = require("fs");
     var buf = new Buffer(2048);
     fs.open(desPath, 'r+', function (err, fd) {
@@ -101,11 +100,14 @@ const copyExposerTemplate = (desPath,targetPath) => {
         }
         fs.read(fd, buf, 0, buf.length, 0, function (err, bytes) {
             fs2 = require('fs');
-            fs2.writeFile(targetPath, buf.slice(0, bytes).toString(),  function(err) {
+            fs2.writeFile(targetPath, buf.slice(0, bytes).toString(), function (err) {
                 if (err) {
                     return console.error(err);
                 }
-             });
+            });
         });
     });
+}
+module.exports = {
+    generateFileMap
 }
