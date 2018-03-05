@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const moment = require('moment');
 const fs = require("fs");
+const tools = require("./tools");
 const questions = [
     {
         type: 'input',
@@ -61,7 +62,7 @@ inquirer
                     }
                     console.log('创建main.md文件成功，将您的文章填入该markdown文件');
                 }));
-                fs.writeFile('src/articlesHelper/fileMap.json', JSON.stringify(generateFileMap('src/articles/')), (err => {
+                fs.writeFile('src/articlesHelper/fileMap.json', JSON.stringify(tools.generateFileMap('src/articles/')), (err => {
                     //创建文件地图
                     if (err) {
                         console.log(err);
@@ -77,20 +78,6 @@ inquirer
         /* 异常处理 */
         console.log('eee1', err);
     });
-const generateFileMap = (base, maxDepth = 2) => {
-    return (function getMap(depth, path) {
-        if (depth > maxDepth) {
-            return true;
-        }
-        let map = {};
-        let files = fs.readdirSync(path);
-        files.length > 0 && files.forEach(dir => {
-            map[dir] = getMap(depth + 1, path + '/' + dir);
-        });
-        return map;
-    })(1, base);
-}
-
 const copyExposerTemplate = (desPath, targetPath) => {
     var fs = require("fs");
     var buf = new Buffer(2048);
@@ -107,7 +94,4 @@ const copyExposerTemplate = (desPath, targetPath) => {
             });
         });
     });
-}
-module.exports = {
-    generateFileMap
 }
