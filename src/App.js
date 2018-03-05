@@ -10,7 +10,7 @@ import FileMap from './articlesHelper/fileMap.json';
 import Nav from './Components/Nav';
 import ALink from './Components/ArticleLink';
 const Gitment = require('gitment');
-
+require('gitment/style/default.css');
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 class App extends Component {
