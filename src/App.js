@@ -8,6 +8,7 @@ import { Menu, Icon } from 'antd';
 import Nav from './Components/Nav';
 import ALink from './Components/ArticleLink';
 import Article from './Containers/Article';
+import ArticleList from './Containers/ArticleList';
 import FileMap from './articlesHelper/fileMap.json';
 // const Gitment = require('gitment');
 // require('gitment/style/default.css');
@@ -31,23 +32,20 @@ class App extends Component {
 						<Nav fileMap={FileMap}
 							onChangeTag={
 								(tag) => {
+									console.log('clktag');
 									this.setState({ currentTag: tag });
 								}
 							} />
 						{/* 文章列表区 */}
-						<div style={{ height: '100%', width: 'auto', overflow: 'scroll', background: '#fff' ,overflowX:'hidden'}}>
+						<div style={{ height: '100%', width: 'auto', overflow: 'scroll', background: '#fff', overflowX: 'hidden' }}>
 							<Switch>
 								{/* 文章显示区 */}
-								<Route path='/:tag/:name' component = {Article} />
-								<Route path='/' render={(props) => {
-									return this.state.currentTag && Object.keys(FileMap[this.state.currentTag]).map(name => {
-										return (
-											<div style={{ margin: '5px' }}>
-												<ALink tag={this.state.currentTag} name={name} />
-											</div>
-										)
-									}) || null
-								}} />
+								<Route path='/:tag/:name' component={Article} />
+								<Route path='/'
+									render={(props) => {
+										return (<ArticleList tag  = {this.state.currentTag}/>)
+									}}
+								/>
 							</Switch>
 						</div>
 					</div>
