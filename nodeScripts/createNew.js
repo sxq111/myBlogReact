@@ -54,7 +54,7 @@ inquirer
                     return;
                 }
                 console.log('创建文章目录成功');
-                fs.writeFile('src/articles/' + tags + '/' + post_name + '/' + 'main.md', '请开始你的表演', (err => {
+                fs.writeFile('src/articles/' + tags + '/' + post_name + '/' + 'main.md', '在此写入您的文章', (err => {
                     //创建markdown
                     if (err) {
                         console.log(err);
@@ -72,6 +72,17 @@ inquirer
                 }));
                 copyExposerTemplate('src/articlesHelper/exposerTemplate.js', 'src/articles/' + tags + '/' + post_name + '/' + 'index.js');
                 copyExposerOverviewTemplate('src/articlesHelper/overviewTemplate.png', 'src/articles/' + tags + '/' + post_name + '/' + 'overview.png');
+                fs.writeFile('src/articles/' + tags + '/' + post_name + '/' + 'basicInfo.json',
+                    JSON.stringify({
+                        time:Date.now()
+                    }), (err => {
+                        //创建markdown
+                        if (err) {
+                            console.log(err);
+                            return
+                        }
+                        console.log('创建basicInfo.json文件成功');
+                    }));
             });
         });
     })
@@ -98,9 +109,9 @@ const copyExposerTemplate = (desPath, targetPath) => {
 }
 const copyExposerOverviewTemplate = (desPath, targetPath) => {
     var fs = require("fs");
-    fs.readFile(desPath,function(err,originBuffer){            //读取图片位置（路径）
+    fs.readFile(desPath, function (err, originBuffer) {            //读取图片位置（路径）
         // console.log(Buffer.isBuffer(originBuffer));
-        fs.writeFile(targetPath,originBuffer,function(err){      //生成图片2(把buffer写入到图片文件)
+        fs.writeFile(targetPath, originBuffer, function (err) {      //生成图片2(把buffer写入到图片文件)
             if (err) {
                 console.log(err)
             }
