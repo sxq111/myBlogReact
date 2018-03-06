@@ -16,7 +16,7 @@ export default class extends Component {
         let md = require(`../articles/${params.tag}/${params.name}`);
         this.setState({ md: md.getArticle() });
         let gitment = new Gitment({
-            id: `articles-${params.tag}-${params.name}`, // 可选。默认为 location.href
+            id: `sxq222-articles-${params.tag}-${params.name}`, // 可选。默认为 location.href
             owner: 'sxq222',
             repo: 'sxq222.github.io',
             oauth: {
