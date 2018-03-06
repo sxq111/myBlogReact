@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FileMap from '../articlesHelper/fileMap.json';
 import Article from '../Components/ArticleBody';
-// import PNG from './test.png';
 
 const Gitment = require('gitment');
 require('gitment/style/default.css');
@@ -33,7 +32,6 @@ export default class extends Component {
                     <Article source={this.state.md || null} />
                 </div>
                 <div id = 'container' ></div>
-                {/* <img src = {PNG}/> */}
             </div>
         );
     }
