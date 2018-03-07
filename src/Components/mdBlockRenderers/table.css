@@ -1,8 +1,11 @@
 .mdtable thead{
-    background: #84b2d4;
+    background: #486f8e;
+    font-size: 1.2em;
+    color: papayawhip;
 }
 .mdtable table{
-    background: #eee;
+    margin: 10px;
+    background: #335875;
 }
 .mdtable tbody tr:nth-child(2n){
     background: #d5e2ef;
