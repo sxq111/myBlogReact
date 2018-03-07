@@ -4,13 +4,16 @@ import ReactHtmlParser from 'react-html-parser';
 import 'prismjs/themes/prism.css';
 
 export default class extends Component {
-    render() {
+    componentDidMount(){        
         const html = highlight(this.props.value, languages[this.props.language]);
+        // document.getElementById('codeContaioner').innerHTML = html;
+        this.ins.innerHTML = html;
+    }
+    render() {
         const cls = `language-${this.props.language}`;
         return (
             <pre className={cls}>
-                <code className={cls}>
-                    {ReactHtmlParser(html)}
+                <code className={cls} ref = {(ins)=>{this.ins = ins}}>
                 </code>
             </pre>
         );
