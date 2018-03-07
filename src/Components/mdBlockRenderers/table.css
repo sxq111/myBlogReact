@@ -1,0 +1,27 @@
+.mdtable thead{
+    background: #84b2d4;
+}
+.mdtable table{
+    background: #eee;
+}
+.mdtable tbody tr:nth-child(2n){
+    background: #d5e2ef;
+}
+.mdtable tbody tr:nth-child(2n-1){
+    background: #dcdada;
+}
+/* .mdtable th{
+    background: #d5e2ef;
+} */
+.mdtable table{
+    border: 1px solid silver;
+}
+.mdtable th{
+    padding: 5px 5px 5px;
+}
+.mdtable td{
+    padding: 3px;
+}
+.mdtable td:hover{
+    background: rosybrown;
+}

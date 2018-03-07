@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './list.css'
 export default class extends Component {
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <div className={styles.mdList}>
                 {
