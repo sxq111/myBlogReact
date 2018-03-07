@@ -32,7 +32,7 @@ class App extends Component {
 						<Nav fileMap={FileMap}
 							onChangeTag={
 								(tag) => {
-									console.log('clktag');
+									// console.log('clktag');
 									this.setState({ currentTag: tag });
 								}
 							} />
