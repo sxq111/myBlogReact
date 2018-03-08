@@ -322,6 +322,9 @@ module.exports = {
     new ManifestPlugin({
       fileName: 'asset-manifest.json',
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names:Object.keys(blogs) // 指定一个希望作为公共包的入口
+    }),
     // Generate a service worker script that will precache, and keep up to date,
     // the HTML & assets that are part of the Webpack build.
     new SWPrecacheWebpackPlugin({

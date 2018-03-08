@@ -12,8 +12,9 @@ export default class extends Component {
     }
     componentDidMount() {
         let { match: { params } } = this.props;
-        let md = require(`../articles/${params.tag}/${params.name}`);
-        this.setState({ md: md.getArticle() });
+        import(`../articles/${params.tag}/${params.name}`).then(md=>{
+            this.setState({ md: md.getArticle() });
+        })
         let gitment = new Gitment({ ...window.gitmentConfig, id: `articles-${params.tag}-${params.name}` });
         gitment.render('container');
     }
