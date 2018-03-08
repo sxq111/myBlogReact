@@ -14,24 +14,16 @@ export default class extends Component {
         let { match: { params } } = this.props;
         let md = require(`../articles/${params.tag}/${params.name}`);
         this.setState({ md: md.getArticle() });
-        let gitment = new Gitment({
-            id: `sxq222-articles-${params.tag}-${params.name}`, // 可选。默认为 location.href
-            owner: 'sxq222',
-            repo: 'sxq222.github.io',
-            oauth: {
-                client_id: 'c9f0c157b8f5ae0d2dfa',
-                client_secret: '6d66c15318a8ffafaf7cd6e9361dd1b8bfea511d',
-            },
-        });
+        let gitment = new Gitment({ ...window.gitmentConfig, id: `articles-${params.tag}-${params.name}` });
         gitment.render('container');
     }
     render() {
         return (
             <div style={{ padding: 10 }}>
-                <div style = {{width:'95%',margin:'0 auto'}}>
+                <div style={{ width: '95%', margin: '0 auto' }}>
                     <Article source={this.state.md || null} />
                 </div>
-                <div id = 'container' ></div>
+                <div id='container' ></div>
             </div>
         );
     }
