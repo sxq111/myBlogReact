@@ -21,7 +21,7 @@ export default class extends Component {
             theImg = this.props.src;
         }
         return (
-            <img alt = '暂无图片' src = {theImg} />
+            <img alt = '暂无图片' src = {theImg} style = {{display:'block',margin:'0 auto'}} />
         )
     }
 }
